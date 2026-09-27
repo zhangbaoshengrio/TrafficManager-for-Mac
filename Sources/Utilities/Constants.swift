@@ -8,7 +8,7 @@ enum Constants {
     // 从这里取值写进 Info.plist，设置窗的「关于」页也读这里，避免三处各写一份。
 
     /// 应用版本号
-    static let appVersion = "0.7.12"
+    static let appVersion = "0.8.0"
 
     /// Bundle ID（打包成 .app 时使用；fork 本项目请改成你自己的反向域名）
     static let bundleIdentifier = "com.mo2g.TrafficMonitor"

@@ -4,6 +4,29 @@ All notable changes to this project are documented here.
 Format loosely follows [Keep a Changelog](https://keepachangelog.com/);
 this project uses [Semantic Versioning](https://semver.org/).
 
+## [0.8.0] — 2026-09-27
+
+TrafficManager for Mac 的第一个发布版本——fork 自 [mo2g/traffic-monitoring](https://github.com/mo2g/traffic-monitoring)，
+在其基础上重做了主窗口仪表盘。详见 README 的 "About this fork" / "关于这个 Fork" 一节。
+
+### Added
+
+- **时间范围从 3 个预设扩展到 7 个**：Today、Yesterday、Last 7 days、Last 30 days、
+  This month、Last month，以及带**双月联动日历**的 Custom 自定义范围。
+- 聚合 "Traffic over time" 图表改成**堆叠柱状图**（上传叠在下载上面），支持
+  click-to-pin 提示气泡（日期/时间 + 总量）。
+- **双击一天的柱子**跳转到 Custom 并定位到那一天，配一键 "Clear filter" 跳回原预设。
+- **历史汇总表格支持点列头排序**，覆盖所有时间范围选择，不再只有实时表格能排。
+- 汇总行三张卡片统一成累计总量（Total downloaded / Total uploaded / 当期流量总量），
+  不再显示实时速率。
+- 时间范围控件从分段控件改成下拉菜单（pull-down menu），修掉了在屏幕顶部弹出时
+  会把靠前选项挤出可视区域的问题。
+
+### Changed
+
+- 版本号从 0.7.12 跳到 0.8.0（语义化版本里的 minor 版本号），标记这是独立于上游
+  版本序列的第一个 fork 发布版本。
+
 ## [0.7.12] — 2026-09-18
 
 ### Changed
