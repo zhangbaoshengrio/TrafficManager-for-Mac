@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    name: Build & Test (macOS 14)
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show toolchain
+        run: swift --version
+
+      - name: Cache SwiftPM
+        uses: actions/cache@v4
+        with:
+          path: .build
+          key: ${{ runner.os }}-spm-${{ hashFiles('Package.resolved') }}
+          restore-keys: ${{ runner.os }}-spm-
+
+      - name: Build (release)
+        run: swift build -c release
+
+      - name: Test
+        run: swift test
+
+      # 验证打包脚本本身没坏 —— 告警功能依赖真实的 .app bundle
+      - name: Package .app and .dmg
+        run: |
+          Scripts/make-dmg.sh
+          test -f dist/TrafficMonitor-*.dmg
+          MP=$(hdiutil attach dist/TrafficMonitor-*.dmg -nobrowse -readonly \
+               | sed -n 's|.*\(/Volumes/.*\)$|\1|p')
+          test -f "$MP/TrafficMonitor.app/Contents/MacOS/TrafficMonitor"
+          test -f "$MP/TrafficMonitor.app/Contents/Resources/AppIcon.icns"
+          plutil -lint "$MP/TrafficMonitor.app/Contents/Info.plist"
+          codesign --verify --deep --strict "$MP/TrafficMonitor.app"
+          hdiutil detach "$MP" -quiet
+
+      - name: Upload .dmg
+        uses: actions/upload-artifact@v4
+        with:
+          name: TrafficMonitor-dmg
+          path: dist/*.dmg
+          if-no-files-found: error

@@ -1,0 +1,185 @@
+/* ── Toolbar ── */
+"toolbar.status.idle"      = "Idle";
+"toolbar.status.running"   = "Collecting";
+"toolbar.status.stopped"   = "Stopped";
+"toolbar.start"            = "Start";
+"toolbar.start.help"       = "Start collecting";
+"toolbar.stop"             = "Stop";
+"toolbar.stop.help"        = "Stop collecting";
+"toolbar.export"           = "Export";
+"toolbar.export.help"      = "Export as CSV";
+"toolbar.search"           = "Search processes";
+
+/* ── Toolbar ── */
+"toolbar.timeRange"        = "Time range";
+"toolbar.groupedView"      = "Grouped view";
+
+/* ── Time ranges ── */
+"range.today"              = "Today";
+"range.yesterday"          = "Yesterday";
+"range.last7Days"          = "Last 7 days";
+"range.last30Days"         = "Last 30 days";
+"range.thisMonth"          = "This month";
+"range.lastMonth"          = "Last month";
+"range.custom"             = "Custom";
+"toolbar.customRange.edit" = "Edit custom range";
+"toolbar.clearFilter"      = "Clear filter";
+"customRange.from"         = "From";
+"customRange.to"           = "To";
+"customRange.done"         = "Done";
+
+/* ── Summary cards ── */
+"summary.downloadRate"     = "Download rate";
+"summary.uploadRate"       = "Upload rate";
+"summary.totalDownloaded" = "Total downloaded";
+"summary.totalUploaded"   = "Total uploaded";
+"summary.rangeTraffic"     = "%@ traffic";
+"aggregate.trafficOverTime" = "Traffic over time";
+"aggregate.showingRange" = "Showing %@";
+"aggregate.clearSelection" = "Clear";
+
+/* ── Table ── */
+"column.process"           = "Process";
+"column.liveDownload"      = "Down now";
+"column.liveUpload"        = "Up now";
+"column.download"          = "Downloaded";
+"column.upload"            = "Uploaded";
+"column.total"             = "Total";
+"column.trend"             = "Trend";
+"column.group"             = "Group";
+"column.memberCount"       = "Processes";
+"group.others"             = "Others";
+
+/* ── Row context menu ── */
+"menu.viewTimeline"        = "View timeline";
+"menu.copyName"            = "Copy name";
+"menu.copyBundleID"        = "Copy bundle ID";
+"menu.revealInFinder"      = "Reveal in Finder";
+
+/* ── Empty state ── */
+"empty.waiting"            = "Waiting for network activity…";
+"empty.pressToStart"       = "Press ⏎ to start collecting";
+
+/* ── CSV ── */
+"csv.header"               = "Process,Down now (B/s),Up now (B/s),Downloaded (B),Uploaded (B),Total (B)";
+
+/* ── Menu bar ── */
+"menubar.accessibility"    = "Down %1$@, up %2$@";
+"menubar.noActivity"       = "No network activity";
+"menubar.window"           = "Window";
+"menubar.quitShort"        = "Quit";
+
+/* ── Detail window ── */
+"detail.close"             = "Close (Esc)";
+"detail.chartStyle.help"   = "Switch chart style";
+"detail.style.line"        = "Line";
+"detail.style.area"        = "Area";
+"detail.style.bar"         = "Bars";
+"detail.range.1h"          = "1 hour";
+"detail.range.6h"          = "6 hours";
+"detail.range.24h"         = "24 hours";
+"detail.range.7d"          = "7 days";
+"detail.liveDownload"      = "Down now";
+"detail.liveUpload"        = "Up now";
+"detail.rangeDownload"     = "Downloaded";
+"detail.rangeUpload"       = "Uploaded";
+"detail.total"             = "Total";
+"detail.peakDownload"      = "Peak down";
+"detail.peakUpload"        = "Peak up";
+"detail.peakShort"       = "peak";
+"detail.layout.help"      = "Upload above the zero axis, or mirrored below";
+"detail.layout.above"     = "Same axis";
+"detail.layout.mirror"    = "Mirrored";
+"detail.noCoverage"       = "No data collected here (Mac asleep or app not running)";
+"detail.dataPoints"        = "Points";
+"detail.noData"            = "No traffic recorded in this period";
+"chart.axis.time"          = "Time";
+"chart.axis.rate"          = "Rate";
+"chart.series"             = "Direction";
+"chart.series.download"    = "Download";
+"chart.series.upload"      = "Upload";
+
+/* ── Settings: general ── */
+"settings.tab.general"     = "General";
+"settings.tab.groups"      = "Groups";
+"settings.tab.alerts"      = "Alerts";
+"settings.tab.logs"        = "Logs";
+"settings.tab.about"       = "About";
+"settings.section.collection" = "Collection";
+"settings.section.data"    = "Data";
+"settings.section.advanced" = "Advanced";
+"settings.interval"        = "Sampling interval";
+"settings.saveInterval"    = "Flush interval";
+"settings.seconds"         = "%d s";
+"settings.language"        = "Language";
+"settings.language.system" = "System";
+"settings.menuBar"         = "Show rates in menu bar";
+"settings.menuBar.help"    = "Keep live up/down rates in the menu bar";
+"settings.menuBarFontSize" = "Menu bar font size";
+"settings.menuBarFontSize.help" = "Both rate lines must fit the 22pt status bar, so the range is small";
+"settings.sparkline"       = "Inline trend chart";
+"settings.sparkline.help"  = "Show a mini rate curve for each process in the table";
+"settings.launchAtLogin"   = "Launch at login";
+"settings.openLoginItems"  = "Open Login Items settings";
+"settings.dbSize"          = "Database size";
+"settings.calculating"     = "Calculating…";
+"settings.autoCleanup"     = "Automatic cleanup";
+"settings.autoCleanup.help"  = "Delete detail rows past the retention period and compact the file";
+"settings.retentionDays"   = "Keep for";
+"settings.days"            = "%d days";
+"settings.cleanNow"        = "Clean now";
+"settings.excluded"        = "Excluded processes";
+"settings.excluded.placeholder" = "Comma separated, press Return to apply";
+"settings.excluded.hint"   = "Matches the process name or display name exactly, case-insensitively — e.g. mDNSResponder, WeChat.\nApplying also clears any traffic already recorded for them.";
+
+/* ── Settings: about ── */
+"about.version"            = "Version";
+"about.stack"              = "Built with";
+"about.minSystem"          = "Requires";
+"about.section.about"      = "About";
+"about.section.details"    = "Technical details";
+"about.collection"         = "Collection";
+"about.collection.value"   = "NetworkStatistics kernel interface (no subprocess)";
+"about.privilege"          = "Privileges";
+"about.privilege.value"    = "None required";
+"about.database"           = "Database";
+
+/* ── Settings: alerts ── */
+"alerts.existing"          = "Existing rules";
+"alerts.none"              = "No alert rules yet";
+"alerts.new"               = "New rule";
+"alerts.global"            = "Global";
+"alerts.name"              = "%@ alert";
+"alerts.processPlaceholder" = "Process name (empty = global)";
+"alerts.bytesPlaceholder"  = "Byte threshold (e.g. 104857600)";
+"alerts.ratePlaceholder"   = "Rate threshold in B/s (e.g. 1048576)";
+"alerts.add"               = "Add rule";
+"alerts.notification.title" = "TrafficMonitor alert";
+"alerts.notification.bytes" = "%1$@ used %2$@, over the %3$@ threshold";
+"alerts.notification.rate" = "%1$@ is at %2$@, over the %3$@ threshold";
+
+/* ── Settings: groups ── */
+"groups.existing"          = "Existing groups";
+"groups.none"              = "No groups yet";
+"groups.new"               = "New group";
+"groups.namePlaceholder"   = "Group name";
+"groups.keysPlaceholder"   = "Process keys (comma separated)";
+"groups.create"            = "Create group";
+
+/* ── Settings: logs ── */
+"logs.filter"              = "Filter";
+"logs.all"                 = "All";
+"logs.refresh"             = "Refresh";
+"logs.recent"              = "Last 50 entries";
+
+/* ── Common ── */
+"common.delete"            = "Delete";
+
+/* ── Launch at login ── */
+"launch.needsAppBundle"    = "Requires running as TrafficMonitor.app (see Scripts/make-app.sh)";
+"launch.notBundled"        = "Unavailable when running the bare binary — package it with Scripts/make-app.sh";
+"launch.requiresApproval"  = "Blocked by System Settings — allow it under Login Items";
+
+/* ── Errors ── */
+"error.databaseInit"       = "Database initialisation failed";
+"error.frameworkUnavailable" = "NetworkStatistics framework unavailable";

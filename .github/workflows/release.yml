@@ -1,0 +1,108 @@
+name: Release
+
+# 打一个 v 开头的 tag 就会自动构建并发布：
+#   git tag v0.5.0 && git push origin v0.5.0
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "要发布的 tag（须已存在）"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build & publish .dmg
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.tag || github.ref }}
+          fetch-depth: 0
+
+      - name: Show toolchain
+        run: swift --version
+
+      # tag 与源码里的版本号必须一致，否则会发出一个版本号对不上的包
+      - name: Verify tag matches Constants.appVersion
+        run: |
+          TAG="${{ github.event.inputs.tag || github.ref_name }}"
+          SOURCE=$(sed -n 's/.*appVersion = "\(.*\)".*/\1/p' Sources/Utilities/Constants.swift)
+          echo "tag=$TAG  Constants.appVersion=$SOURCE"
+          if [ "$TAG" != "v$SOURCE" ]; then
+            echo "::error::tag $TAG 与 Constants.appVersion ($SOURCE) 不一致，" \
+                 "请把 Constants.swift 里的版本号改成 ${TAG#v} 后重新打 tag"
+            exit 1
+          fi
+
+      - name: Test
+        run: swift test
+
+      - name: Build .dmg
+        run: Scripts/make-dmg.sh
+
+      - name: Verify bundle
+        run: |
+          DMG=$(ls dist/*.dmg)
+          MP=$(hdiutil attach "$DMG" -nobrowse -readonly \
+               | sed -n 's|.*\(/Volumes/.*\)$|\1|p')
+          test -f "$MP/TrafficMonitor.app/Contents/MacOS/TrafficMonitor"
+          test -f "$MP/TrafficMonitor.app/Contents/Resources/AppIcon.icns"
+          plutil -lint "$MP/TrafficMonitor.app/Contents/Info.plist"
+          codesign --verify --deep --strict "$MP/TrafficMonitor.app"
+          hdiutil detach "$MP" -quiet
+
+      # 发布说明取自 CHANGELOG 里对应版本那一节，附上校验和与安装提示
+      - name: Compose release notes
+        run: |
+          TAG="${{ github.event.inputs.tag || github.ref_name }}"
+          VERSION="${TAG#v}"
+          DMG=$(ls dist/*.dmg)
+          SHA=$(shasum -a 256 "$DMG" | awk '{print $1}')
+
+          {
+            awk -v v="$VERSION" '
+              $0 ~ "^## \\[" v "\\]" { inside = 1; next }
+              inside && /^## \[/     { exit }
+              inside                 { print }
+            ' CHANGELOG.md
+
+            echo
+            echo "---"
+            echo
+            echo "### 安装"
+            echo
+            echo '打开 `.dmg`，把 TrafficMonitor 拖进「应用程序」。'
+            echo
+            echo '构建产物只做了 ad-hoc 签名、**未做公证**，首次打开需右键 → 打开，或：'
+            echo
+            echo '```bash'
+            echo 'xattr -dr com.apple.quarantine /Applications/TrafficMonitor.app'
+            echo '```'
+            echo
+            echo "### 校验和"
+            echo
+            echo '```'
+            echo "SHA-256  $SHA"
+            echo "$(basename "$DMG")"
+            echo '```'
+            echo
+            echo "构建自 \`${{ github.sha }}\`，macOS 14 runner。"
+          } > release-notes.md
+
+          echo "── 生成的发布说明 ──"
+          cat release-notes.md
+
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="${{ github.event.inputs.tag || github.ref_name }}"
+          gh release create "$TAG" dist/*.dmg \
+            --title "TrafficMonitor ${TAG#v}" \
+            --notes-file release-notes.md \
+            --verify-tag

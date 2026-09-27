@@ -1,0 +1,50 @@
+# ── Swift / SwiftPM ──
+.build/
+.swiftpm/
+Packages/
+*.xcodeproj
+*.xcworkspace
+
+# ── Xcode ──
+DerivedData/
+*.xcuserstate
+xcuserdata/
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# ── 构建产物 ──
+/build/
+TrafficMonitor.app/
+
+# ── macOS ──
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# ── 编辑器 / IDE ──
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# ── 工具本地状态（不应进仓库）──
+.claude/settings.local.json
+.claude/.cc-writes/
+.cc-writes/
+.superpowers/
+
+# ── 本地数据 ──
+*.db
+*.db-wal
+*.db-shm
+
+# ── 分发产物 ──
+dist/
+*.dmg
+Resources/AppIcon.iconset/

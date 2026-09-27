@@ -1,0 +1,185 @@
+/* ── 工具栏 ── */
+"toolbar.status.idle"      = "就绪";
+"toolbar.status.running"   = "采集中";
+"toolbar.status.stopped"   = "已停止";
+"toolbar.start"            = "启动";
+"toolbar.start.help"       = "启动采集";
+"toolbar.stop"             = "停止";
+"toolbar.stop.help"        = "停止采集";
+"toolbar.export"           = "导出";
+"toolbar.export.help"      = "导出 CSV";
+"toolbar.search"           = "搜索进程";
+
+/* ── 工具栏 ── */
+"toolbar.timeRange"        = "时间范围";
+"toolbar.groupedView"      = "按分组查看";
+
+/* ── 时间范围 ── */
+"range.today"              = "今日";
+"range.yesterday"          = "昨天";
+"range.last7Days"          = "最近7天";
+"range.last30Days"         = "最近30天";
+"range.thisMonth"          = "本月";
+"range.lastMonth"          = "上个月";
+"range.custom"             = "自定义";
+"toolbar.customRange.edit" = "编辑自定义范围";
+"toolbar.clearFilter"      = "清除筛选";
+"customRange.from"         = "从";
+"customRange.to"           = "到";
+"customRange.done"         = "完成";
+
+/* ── 汇总卡片 ── */
+"summary.downloadRate"     = "下载速率";
+"summary.uploadRate"       = "上传速率";
+"summary.totalDownloaded" = "下载总量";
+"summary.totalUploaded"   = "上传总量";
+"summary.rangeTraffic"     = "%@流量";
+"aggregate.trafficOverTime" = "流量趋势";
+"aggregate.showingRange" = "正在显示 %@";
+"aggregate.clearSelection" = "清除";
+
+/* ── 表格 ── */
+"column.process"           = "进程";
+"column.liveDownload"      = "实时下载";
+"column.liveUpload"        = "实时上传";
+"column.download"          = "下载";
+"column.upload"            = "上传";
+"column.total"             = "合计";
+"column.trend"             = "趋势";
+"column.group"             = "分组";
+"column.memberCount"       = "进程数";
+"group.others"             = "其他";
+
+/* ── 行右键菜单 ── */
+"menu.viewTimeline"        = "查看时间线";
+"menu.copyName"            = "复制名称";
+"menu.copyBundleID"        = "复制 Bundle ID";
+"menu.revealInFinder"      = "在访达中显示";
+
+/* ── 空状态 ── */
+"empty.waiting"            = "等待网络活动…";
+"empty.pressToStart"       = "按 ⏎ 启动采集";
+
+/* ── CSV ── */
+"csv.header"               = "进程,实时下载(B/s),实时上传(B/s),下载(B),上传(B),合计(B)";
+
+/* ── 菜单栏 ── */
+"menubar.accessibility"    = "下行 %1$@，上行 %2$@";
+"menubar.noActivity"       = "当前没有网络活动";
+"menubar.window"           = "主窗口";
+"menubar.quitShort"        = "退出";
+
+/* ── 详情窗 ── */
+"detail.close"             = "关闭 (Esc)";
+"detail.chartStyle.help"   = "切换图表样式";
+"detail.style.line"        = "曲线";
+"detail.style.area"        = "面积";
+"detail.style.bar"         = "柱状";
+"detail.range.1h"          = "1 小时";
+"detail.range.6h"          = "6 小时";
+"detail.range.24h"         = "24 小时";
+"detail.range.7d"          = "7 天";
+"detail.liveDownload"      = "实时下载";
+"detail.liveUpload"        = "实时上传";
+"detail.rangeDownload"     = "区间下载";
+"detail.rangeUpload"       = "区间上传";
+"detail.total"             = "合计";
+"detail.peakDownload"      = "峰值下载";
+"detail.peakUpload"        = "峰值上传";
+"detail.peakShort"       = "峰";
+"detail.layout.help"      = "上行画在零轴上方，或镜像到下方";
+"detail.layout.above"     = "同轴";
+"detail.layout.mirror"    = "镜像";
+"detail.noCoverage"       = "这段时间没有采集（机器休眠或应用未运行）";
+"detail.dataPoints"        = "数据点";
+"detail.noData"            = "这段时间没有记录到流量";
+"chart.axis.time"          = "时间";
+"chart.axis.rate"          = "速率";
+"chart.series"             = "方向";
+"chart.series.download"    = "下载";
+"chart.series.upload"      = "上传";
+
+/* ── 设置：通用 ── */
+"settings.tab.general"     = "通用";
+"settings.tab.groups"      = "分组";
+"settings.tab.alerts"      = "告警";
+"settings.tab.logs"        = "日志";
+"settings.tab.about"       = "关于";
+"settings.section.collection" = "采集设置";
+"settings.section.data"    = "数据管理";
+"settings.section.advanced" = "高级";
+"settings.interval"        = "采集间隔";
+"settings.saveInterval"    = "保存间隔";
+"settings.seconds"         = "%d 秒";
+"settings.language"        = "界面语言";
+"settings.language.system" = "跟随系统";
+"settings.menuBar"         = "菜单栏显示速率";
+"settings.menuBar.help"    = "在菜单栏常驻显示实时上下行速率";
+"settings.menuBarFontSize" = "菜单栏字号";
+"settings.menuBarFontSize.help" = "两行速率要挤进状态栏的 22pt，字号上限有限";
+"settings.sparkline"       = "行内趋势图";
+"settings.sparkline.help"  = "在表格里为每个进程显示最近速率的迷你曲线";
+"settings.launchAtLogin"   = "开机启动";
+"settings.openLoginItems"  = "打开登录项设置";
+"settings.dbSize"          = "数据库大小";
+"settings.calculating"     = "计算中…";
+"settings.autoCleanup"     = "自动清理";
+"settings.autoCleanup.help"  = "自动删除超过保留期的明细，并整理数据库文件";
+"settings.retentionDays"   = "保留天数";
+"settings.days"            = "%d 天";
+"settings.cleanNow"        = "立即清理";
+"settings.excluded"        = "排除进程";
+"settings.excluded.placeholder" = "用逗号分隔，回车生效";
+"settings.excluded.hint"   = "按进程名或显示名精确匹配（不区分大小写），例如 mDNSResponder, 微信。\n生效后已统计的数据会一并清除。";
+
+/* ── 设置：关于 ── */
+"about.version"            = "版本";
+"about.stack"              = "技术栈";
+"about.minSystem"          = "最低系统";
+"about.section.about"      = "关于";
+"about.section.details"    = "技术细节";
+"about.collection"         = "采集方式";
+"about.collection.value"   = "NetworkStatistics 内核接口（无子进程）";
+"about.privilege"          = "提权方式";
+"about.privilege.value"    = "无需提权";
+"about.database"           = "数据库";
+
+/* ── 设置：告警 ── */
+"alerts.existing"          = "现有规则";
+"alerts.none"              = "暂无告警规则";
+"alerts.new"               = "新建规则";
+"alerts.global"            = "全局";
+"alerts.name"              = "%@ 告警";
+"alerts.processPlaceholder" = "进程名（留空=全局）";
+"alerts.bytesPlaceholder"  = "字节阈值（如 104857600）";
+"alerts.ratePlaceholder"   = "速率阈值 B/s（如 1048576）";
+"alerts.add"               = "添加规则";
+"alerts.notification.title" = "TrafficMonitor 告警";
+"alerts.notification.bytes" = "%1$@ 流量 %2$@ 超过 %3$@";
+"alerts.notification.rate" = "%1$@ 速率 %2$@ 超过 %3$@";
+
+/* ── 设置：分组 ── */
+"groups.existing"          = "现有分组";
+"groups.none"              = "暂无分组";
+"groups.new"               = "新建分组";
+"groups.namePlaceholder"   = "分组名称";
+"groups.keysPlaceholder"   = "进程键（逗号分隔）";
+"groups.create"            = "创建分组";
+
+/* ── 设置：日志 ── */
+"logs.filter"              = "过滤";
+"logs.all"                 = "全部";
+"logs.refresh"             = "刷新";
+"logs.recent"              = "最近 50 条";
+
+/* ── 通用 ── */
+"common.delete"            = "删除";
+
+/* ── 开机自启动状态 ── */
+"launch.needsAppBundle"    = "需要以 TrafficMonitor.app 的形式运行（见 Scripts/make-app.sh）";
+"launch.notBundled"        = "以裸可执行文件运行时不可用，请用 Scripts/make-app.sh 打包";
+"launch.requiresApproval"  = "已被系统设置阻止，需要在「登录项」中手动允许";
+
+/* ── 错误 ── */
+"error.databaseInit"       = "数据库初始化失败";
+"error.frameworkUnavailable" = "NetworkStatistics 框架不可用";
