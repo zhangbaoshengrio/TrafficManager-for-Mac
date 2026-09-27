@@ -11,7 +11,7 @@ enum Constants {
     static let appVersion = "0.8.0"
 
     /// Bundle ID（打包成 .app 时使用；fork 本项目请改成你自己的反向域名）
-    static let bundleIdentifier = "com.mo2g.TrafficMonitor"
+    static let bundleIdentifier = "com.zhangbaoshengrio.TrafficMonitor"
 
     // MARK: - 采集
 
