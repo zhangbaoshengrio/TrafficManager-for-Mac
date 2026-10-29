@@ -4,6 +4,16 @@ All notable changes to this project are documented here.
 Format loosely follows [Keep a Changelog](https://keepachangelog.com/);
 this project uses [Semantic Versioning](https://semver.org/).
 
+## [0.8.1] — 2026-10-29
+
+### Fixed
+
+- **代理/隧道客户端的流量被重复统计**：Shadowrocket、Surge 这类 NetworkExtension 客户端的外层 socket
+  承载的是其他应用已被内核按进程计过的同一批字节，导致其行数值虚高、总量和告警阈值被放大。
+  现在会读取扩展的 `Info.plist`，把扩展点为 `packet-tunnel` / `app-proxy` 的进程识别为隧道出口并丢弃；
+  另有一份已知代理内核进程名单（`tailscaled`、`mihomo`、`sing-box` 等）。代理客户端主程序自身的流量照常统计。
+- 升级前已写入数据库的重复记录不会被自动修正。
+
 ## [0.8.0] — 2026-09-27
 
 TrafficManager for Mac 的第一个发布版本——fork 自 [mo2g/traffic-monitoring](https://github.com/mo2g/traffic-monitoring)，
