@@ -72,4 +72,18 @@ enum Constants {
     static let alwaysExcludedProcesses: Set<String> = [
         "kernel_task", "launchd", "WindowServer",
     ]
+
+    /// 已知的隧道/代理出口进程名（小写，精确匹配）。
+    /// 这些进程发出的是其他应用已计过的流量，统计会重复。
+    /// 基于 NetworkExtension 的客户端（Shadowrocket、Surge 等）不靠这个名单，
+    /// 由 `ProcessIdentityResolver` 读扩展的 Info.plist 结构化识别。
+    static let tunnelEgressProcessNames: Set<String> = [
+        "tailscaled", "mihomo", "verge-mihomo", "clash-meta", "sing-box", "xray", "v2ray",
+    ]
+
+    /// 视为隧道出口的 NetworkExtension 扩展点
+    static let tunnelExtensionPoints: Set<String> = [
+        "com.apple.networkextension.packet-tunnel",
+        "com.apple.networkextension.app-proxy",
+    ]
 }

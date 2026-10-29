@@ -229,7 +229,7 @@ actor TrafficPipeline {
         guard !frame.isBaseline else {
             for d in frame.deltas {
                 let identity = resolver.identity(pid: d.pid, execName: d.execName)
-                guard !isExcluded(identity) else { continue }
+                guard !identity.isTunnelEgress, !isExcluded(identity) else { continue }
                 if stats[identity.key] == nil {
                     stats[identity.key] = ProcessStats(
                         identity: identity,
@@ -253,7 +253,7 @@ actor TrafficPipeline {
 
         for d in frame.deltas {
             let identity = resolver.identity(pid: d.pid, execName: d.execName)
-            guard !isExcluded(identity) else { continue }
+            guard !identity.isTunnelEgress, !isExcluded(identity) else { continue }
             let key = identity.key
             if let cur = aggregated[key] {
                 aggregated[key] = (cur.bytesIn + d.bytesIn, cur.bytesOut + d.bytesOut, cur.identity)

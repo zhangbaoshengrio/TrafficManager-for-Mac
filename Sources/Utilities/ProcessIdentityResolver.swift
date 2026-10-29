@@ -29,6 +29,9 @@ struct ProcessIdentityResolver {
     // MARK: - Resolve（仅缓存未命中时执行）
 
     private static func resolve(pid: Int32, execName: String) -> ProcessIdentifier {
+        let path = executablePath(for: pid)
+        let tunnel = isTunnelEgress(execName: execName, path: path)
+
         // 1. NSRunningApplication —— 最可靠，且能顺带拿到本地化名和 bundle 路径
         if let app = NSRunningApplication(processIdentifier: pid),
            let bundleId = app.bundleIdentifier {
@@ -36,15 +39,15 @@ struct ProcessIdentityResolver {
                 bundleId: bundleId,
                 execName: execName,
                 displayName: app.localizedName,
-                iconPath: app.bundleURL?.path ?? executablePath(for: pid).nilIfEmpty
+                iconPath: app.bundleURL?.path ?? path.nilIfEmpty,
+                isTunnelEgress: tunnel
             )
         }
 
-        let path = executablePath(for: pid)
-
         // 2. 可执行文件路径反查 .app Bundle（后台 helper 进程常走这条）
         if let (bundleId, bundlePath) = bundleInfo(fromExecutablePath: path) {
-            return ProcessIdentifier(bundleId: bundleId, execName: execName, iconPath: bundlePath)
+            return ProcessIdentifier(bundleId: bundleId, execName: execName,
+                                     iconPath: bundlePath, isTunnelEgress: tunnel)
         }
 
         // 3. 守护进程 / CLI：用进程名，图标取可执行文件自身（活动监视器同样处理）
@@ -52,8 +55,20 @@ struct ProcessIdentityResolver {
             bundleId: nil,
             execName: execName,
             displayName: execName,
-            iconPath: path.nilIfEmpty
+            iconPath: path.nilIfEmpty,
+            isTunnelEgress: tunnel
         )
+    }
+
+    /// 是否隧道/代理出口：已知进程名，或可执行文件位于 NetworkExtension 隧道类 `.appex` 内。
+    static func isTunnelEgress(execName: String, path: String) -> Bool {
+        if Constants.tunnelEgressProcessNames.contains(execName.lowercased()) { return true }
+        guard let range = path.range(of: ".appex/") else { return false }
+        let plist = String(path[..<range.lowerBound]) + ".appex/Contents/Info.plist"
+        guard let info = NSDictionary(contentsOfFile: plist),
+              let ext = info["NSExtension"] as? [String: Any],
+              let point = ext["NSExtensionPointIdentifier"] as? String else { return false }
+        return Constants.tunnelExtensionPoints.contains(point)
     }
 
     private static func bundleInfo(fromExecutablePath path: String) -> (bundleId: String, bundlePath: String)? {

@@ -25,6 +25,13 @@ struct ProcessIdentifier: Hashable, CustomStringConvertible {
     /// `ProcessIconCache` 按需加载并缓存，避免非 Sendable 的 AppKit 对象穿过 actor 边界。
     let iconPath: String?
 
+    /// 该进程是否是隧道/代理的出口进程（如 Shadowrocket 的 PacketTunnel 扩展、tailscaled）。
+    ///
+    /// 它们的外层 socket 承载的是**其他应用已被内核按进程计过的同一批字节**
+    /// （应用 connect() → utun → 代理出口），计入就会重复统计，因此在采集链路上直接丢弃。
+    /// 不参与相等性与哈希。
+    let isTunnelEgress: Bool
+
     /// 聚合键：Bundle ID 优先，把 Chrome 的几十个子进程归为一条
     var key: String { bundleId ?? execName }
 
@@ -32,13 +39,15 @@ struct ProcessIdentifier: Hashable, CustomStringConvertible {
 
     var sortKey: String { displayName.lowercased() }
 
-    init(bundleId: String?, execName: String, displayName: String? = nil, iconPath: String? = nil) {
+    init(bundleId: String?, execName: String, displayName: String? = nil, iconPath: String? = nil,
+         isTunnelEgress: Bool = false) {
         self.bundleId = bundleId
         self.execName = execName
         self.displayName = displayName
             ?? bundleId?.components(separatedBy: ".").last
             ?? execName
         self.iconPath = iconPath
+        self.isTunnelEgress = isTunnelEgress
     }
 
     static func == (lhs: Self, rhs: Self) -> Bool { lhs.key == rhs.key }
